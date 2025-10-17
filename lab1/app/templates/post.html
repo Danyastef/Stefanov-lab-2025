@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="my-3 mt-5">{{ post.title }}</h1>
+    <p>{{ post.author }}, {{ post.date.strftime('%d.%m.%Y') }}</p>
+    <img src="{{ url_for('static', filename='images/' + post.image_id) }}" class="rounded mx-auto d-block" alt="Post image cap" style="max-width: 75%;">
+    <p class="mt-5">{{ post.text }}</p>
+    <div class="mt-4">
+        <div class="card">
+            <div class="card-header">Оставьте комментарий</div>
+            <div class="card-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="comment" style="display: none;"></label>
+                        <textarea class="form-control" id="comment" rows="4"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Отправить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% for comment in post.comments %}
+        <div class="d-flex mt-4">
+            <div class="flex-shrink-0">
+                <img src="{{ url_for('static', filename='images/avatar.jpg') }}" class="rounded-circle" alt="Avatar" width="50">
+            </div>
+            <div class="flex-grow-1 ms-3">
+                <h5>{{ comment.author }} <small class="text-muted"></small></h5>
+                <p>{{ comment.text }}</p>
+                {% if comment.replies %}
+                    {% for reply in comment.replies %}
+                    <div class="d-flex mt-4">
+                        <div class="flex-shrink-0">
+                            <img src="{{ url_for('static', filename='images/avatar.jpg') }}" class="rounded-circle" alt="Avatar" width="40">
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h5>{{ reply.author }} <small class="text-muted"></small></h5>
+                            <p>{{ reply.text }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
