@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="my-5">Проверка формата номера телефона</h1>
+    <form method="POST">
+        <div class="form-group">
+            <label for="check_num">Номер телефона</label>
+            <input type="phone" class="form-control {% if error %}is-invalid{% endif %}" id="check_num" name="phone_num" {% if phone %}value="{{ phone }}{% endif %}">
+            <div class="invalid-feedback">
+                {{ error }}
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Проверить</button>
+    </form>
+{% endblock %}

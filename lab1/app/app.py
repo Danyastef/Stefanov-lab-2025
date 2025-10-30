@@ -1,6 +1,6 @@
 import random
 from functools import lru_cache
-from flask import Flask, render_template
+from flask import Flask, render_template, abort
 from faker import Faker
 
 fake = Faker()
@@ -47,12 +47,11 @@ def posts():
 
 @app.route('/posts/<int:index>')
 def post(index):
+    if index >= len(posts_list()):
+        abort(404)
     p = posts_list()[index]
     return render_template('post.html', title=p['title'], post=p)
 
 @app.route('/about')
 def about():
     return render_template('about.html', title='Об авторе')
-
-if __name__ == '__main__':
-    app.run(debug=True)

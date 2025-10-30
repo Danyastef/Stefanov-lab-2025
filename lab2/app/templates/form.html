@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="my-5">Параметры формы</h1>
+    <form method="POST">
+        <div class="form-group">
+            <label for="surname">Фамилия</label>
+            <input type="text" class="form-control" id="surname" name="student_surname" value="{{ request.form.get('student_name') or '' }}">
+        </div>
+        <div class="form-group">
+            <label for="name">Имя</label>
+            <input type="text" class="form-control" id="name" name="student_name" value="{{ request.form.get('student_surname') or '' }}">
+        </div>
+        <div class="form-group">
+            <label for="textarea">Текст</label>
+            <textarea class="form-control" id="textarea" name="text" rows="3">{{ request.form.get('text') or '' }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Отправить</button>
+    </form>
+
+    {% if request.form %}
+        <table class="table mt-4">
+            <tbody>
+                {% for k, v in request.form.items() %}
+                    <tr>
+                        <td>{{ k }}</td>
+                        <td>{{ v }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}
