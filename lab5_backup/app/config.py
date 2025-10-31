@@ -1,7 +1,0 @@
-import os
-
-SECRET_KEY = 'da4ba06f7e16bb5294eb76d6555d6a3df767f5e2a018bb6a264d4a23d6ffffe1'
-
-SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://root:stef68248@127.0.0.1/lab5_test'
-SQLALCHEMY_TRACK_MODIFICATIONS = False
-SQLALCHEMY_ECHO = True
