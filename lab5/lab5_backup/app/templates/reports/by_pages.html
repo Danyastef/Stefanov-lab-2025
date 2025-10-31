@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">№</th>
+                <th scope="col">Страница</th>
+                <th scope="col">Количество посещений</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in stats %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ row.path }}</td>
+                <td>{{ row.count }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<a href="{{ url_for('reports.export_by_pages') }}" class="btn btn-primary">Экспорт в CSV</a>
+{% endblock %}
